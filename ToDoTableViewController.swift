@@ -14,12 +14,15 @@ class ToDoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super .viewDidLoad()
-        
-        if let savedToDos = ToDo.loadToDos() {
+        if let savedToDos = ToDo.loadToDos()
+        {
             todos = savedToDos
-        } else {
+        }
+        else
+        {
             todos = ToDo.loadSampleTodos()
         }
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     override func tableView(_ tableView: UITableView,
@@ -29,24 +32,28 @@ class ToDoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt
-        indexPath: IndexPath) -> Bool {
+        indexPath: IndexPath) -> Bool
+    {
         return true
     }
     
     override func tableView(_ tableView: UITableView, commit
         editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        if editingStyle == .delete
+        {
             todos.remove(at: indexPath.row)
-            tableView.deleteRows(at: )
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt
-        indexPath: IndexPath) -> UITableViewCell {
+        indexPath: IndexPath) -> UITableViewCell
+        {
         guard let cell =
             tableView.dequeueReusableCell(withIdentifier:
-                "ToDoCellIdentifier") else {
+                "ToDoCellIdentifier") else
+        {
                     fatalError("Could not dequeue a cell")
         }
         let todo = todos[indexPath.row]
@@ -54,6 +61,9 @@ class ToDoTableViewController: UITableViewController {
         return cell
     }
     
-    
+    @IBAction func unwindToToDoList(segue: UIStoryboardSegue)
+    {
+        
+    }
     
 }
